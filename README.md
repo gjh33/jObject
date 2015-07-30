@@ -1,8 +1,6 @@
 # JObject
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/jObject`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+jObject is a gem designed to parse json strings with json objects and convert them into usable ruby objects.
 
 ## Installation
 
@@ -22,17 +20,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Usage is as simple as running
 
-## Development
+```ruby
+json_string = '{ "attribute": "value" }'
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+my_object = JObject.parse(json_string)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+my_object.attribute #=> "value"
+```
+
+If you want to parse a json string that is a list of objects,
+simply use
+
+```ruby
+json_string = '[{ "name": "object1" }, { "name": "object2" }]'
+
+my_objects = JObject.parse_each(json_string)
+
+my_objects[0].name #=> "object1"
+my_objects[1].name #=> "object2"
+```
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jObject.
+Bug reports and pull requests are welcome on GitHub at https://github.com/gjh33/jObject.
 
 
 ## License
